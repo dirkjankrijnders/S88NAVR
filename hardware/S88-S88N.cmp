@@ -1,0 +1,24 @@
+Cmp-Mod V01 Created by CvPcb (2012-nov-02)-testing date = Wed 23 Jan 2013 05:53:43 PM CET
+
+BeginCmp
+TimeStamp = /50FFDA68;
+Reference = J1;
+ValeurCmp = RJ45;
+IdModule  = RJ45_8;
+EndCmp
+
+BeginCmp
+TimeStamp = /50FFDA8F;
+Reference = P1;
+ValeurCmp = CONN_6;
+IdModule  = SIL-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /50FFDA9E;
+Reference = P2;
+ValeurCmp = CONN_6;
+IdModule  = SIL-7;
+EndCmp
+
+EndListe

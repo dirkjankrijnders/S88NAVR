@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 23 Jan 2013 01:45:22 PM CET
+EESchema Schematic File Version 2  date Wed 23 Jan 2013 11:11:31 PM CET
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -44,28 +44,28 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L RJ45 J?
+L RJ45 J1
 U 1 1 50FFDA68
 P 2850 3450
-F 0 "J?" H 3050 3950 60  0000 C CNN
+F 0 "J1" H 3050 3950 60  0000 C CNN
 F 1 "RJ45" H 2700 3950 60  0000 C CNN
 	1    2850 3450
 	0    -1   -1   0   
 $EndComp
 $Comp
-L CONN_6 P?
+L CONN_6 P1
 U 1 1 50FFDA8F
 P 4300 3400
-F 0 "P?" V 4250 3400 60  0000 C CNN
+F 0 "P1" V 4250 3400 60  0000 C CNN
 F 1 "CONN_6" V 4350 3400 60  0000 C CNN
 	1    4300 3400
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_7 P?
+L CONN_7 P2
 U 1 1 50FFDA9E
 P 4300 4300
-F 0 "P?" V 4250 4300 60  0000 C CNN
+F 0 "P2" V 4250 4300 60  0000 C CNN
 F 1 "CONN_6" V 4350 4300 60  0000 C CNN
 	1    4300 4300
 	1    0    0    -1  

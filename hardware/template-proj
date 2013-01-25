@@ -1,0 +1,10 @@
+*TopLayer=%(prefix)s-F_Cu.gtl
+*BottomLayer=%(prefix)s-B_Cu.gbl
+*TopSilkscreen=%(prefix)s-F_SilkS.gto
+*BottomSilkscreen=%(prefix)s-B_SilkS.gbo
+*TopSoldermask=%(prefix)s-F_Mask.gts
+*BottomSoldermask=%(prefix)s-B_Mask.gbs
+Drills=%(prefix)s.drl
+NPTHDrills=%(prefix)s-NPTH.drl
+BoardOutline=%(prefix)s-Edge_Cuts.gbr
+

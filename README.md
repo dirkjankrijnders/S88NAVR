@@ -11,15 +11,18 @@ The goal is the make small, cheap reliable feedback modules for the S88 system. 
 State
 -----
 The parts for the first revision (Rev. 0) have been ordered, including the PCB at Seeedstudios. See below for an image and a BOM of the non-standard parts.
-![](Images/Rev0_PCB_Panel.png)
+![](Images/Rev0_PCB_Panel.png). The total is still enough under €5.00 to fit the passives and stand-offs (no prices because then come from my stock).
 <table>
 <tr>
-<th>Part</th><th>#</th><th>Conrad #</th>
+<th>Part</th><th>#</th><th>Conrad #</th><th>price* (€)</th>
 </tr>
-<tr><td>IC1</td><td>1</td><td>154273</td></tr>
-<tr><td>P2,P3</td><td>2</td><td>731817+731830</td></tr>
-<tr><td>J1,J2</td><td>2</td><td>716232</td></tr>
+<tr><td>IC1</td><td>1</td><td>154273</td><td>2.41</td></tr>
+<tr><td>P2,P3</td><td>2</td><td>731817+731830</td><td>0.71</td></tr>
+<tr><td>J1,J2</td><td>2</td><td>716232</td><td>0.58</td></tr>
+<tr><td>PCB</td><td>1</td><td>Seeed</td><td>0.64</td></tr>
+<tr><td colspan=3>Total</td><td>4.34</td></tr>
 </table>
+*When ordering 10+ quantities
 
 LICENSE
 -------

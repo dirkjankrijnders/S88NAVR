@@ -6,7 +6,8 @@ An implementation of the S88-N protocol for Atmel Atmega[8/48/88/168/328] microc
 Goal
 ----
 
-The goal is the make small, cheap reliable feedback modules for the S88 system. Hence choice for the microcontroller, one IC instead of the three discreet ones. The choice for SMD technology for a small board with components on both sides, as most will be hand soldered. The reliability comes from the use of the S88-N Cabling and timing and a RC input network. If wanted the RC network can be short to minimize cost when needed, leaving 10 components (2 connectors, an uc, two caps and five resistors). The board is designed for production by cheap production houses like seeedstudio's PCB service. Goal is to stay under €5.00 for the fully build PCB.
+The goal is the make small, cheap reliable feedback modules for the S88 system. Hence choice for the microcontroller, one IC instead of the three discreet ones. The choice for SMD technology for a small board with components on both sides, as most will be hand soldered. The reliability comes from the use of the S88-N Cabling and timing, input diodes and a RC input network. If wanted the RC network and diodes can be short to minimize cost when needed, leaving 10 components (2 connectors, an uc, two caps and five resistors). The RC-network kills spike, the 1N4148 does the same ensuring the reliability of the detection, the big diode make sure the "detection" rail acts a as a ground return as well ensuring reliable operation of the track. 
+The board is designed for production by cheap production houses like seeedstudio's PCB service. Goal is to stay under €5.00 for the fully build PCB.
 
 State
 -----

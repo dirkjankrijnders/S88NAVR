@@ -1,5 +1,6 @@
-PRG	    = S88NAtmega328
-OBJ	    = S88NAtmega328.o
+PRG	    = HSI88Atmega328
+OBJ	    = HSI88Atmega328.o
+F_CPU	    = 16000000
 #MCU_TARGET     = at90s2313
 #MCU_TARGET     = at90s2333
 #MCU_TARGET     = at90s4414
@@ -26,7 +27,7 @@ OBJ	    = S88NAtmega328.o
 #MCU_TARGET     = atmega325
 #MCU_TARGET     = atmega3250
 #MCU_TARGET     = atmega329
-MCU_TARGET     = atmega328
+MCU_TARGET     = atmega328p
 #MCU_TARGET     = atmega3290
 #MCU_TARGET     = atmega48
 #MCU_TARGET     = atmega64
@@ -63,7 +64,7 @@ CC	     = avr-gcc
 
 # Override is only needed by avr-lib build system.
 
-override CFLAGS	= -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
+override CFLAGS	= -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS) -DF_CPU=$(F_CPU)
 override LDFLAGS       = -Wl,-Map,$(PRG).map
 
 OBJCOPY	= avr-objcopy
@@ -143,3 +144,6 @@ pdf: $(PRG).pdf
 
 %.png: %.fig
 	$(FIG2DEV) -L png $< $@
+
+upload: $(PRG).hex
+	avrdude -pm328p -carduino -P/dev/tty.usbserial-A700eEwx -b57600 -v -Uflash:w:$(PRG).hex:i

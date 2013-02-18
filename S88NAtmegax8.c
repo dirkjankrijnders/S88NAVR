@@ -5,6 +5,7 @@
 #define S88RST // Unused
 #define S88DATAIN PB7
 #define S88DATAOUT PD0
+#define LED PB6 
 
 #include <inttypes.h>
 #include <avr/io.h>
@@ -16,7 +17,7 @@ uint8_t t;
 uint8_t m = 0;
 
 ISR(INT0_vect) {
-  cli();
+//  cli();
   if (((PIND & (1 << S88CLK)) == (1 << S88CLK))) {   // If rising edge, write S88DATAOUT
     if ((buffer & 1) == 1) {
       PORTD |= (1 << S88DATAOUT); //(1 << 6);
@@ -26,21 +27,28 @@ ISR(INT0_vect) {
     // Shift register and add value;
     buffer = (buffer >> 1);// | t;
   } else {   // If falling edge, read S88DATAIN
-    t = (PINB & S88DATAIN) ? msb : 0;
+    t = (PINB & S88DATAIN) ? 1 : 0;
     buffer |= (t << 15);
   };
   
  
-  sei();
+//  sei();
 }
 
 ISR(INT1_vect) { // LOAD
   buffer = 0b1100111011110000;
+  PORTB ^= (1 << LED);
+/*  buffer = 0;
+  buffer |= (PIND >> 4); // The four msb of D become the lsb of the buffer
+  buffer |= (PINB << 4); // All bits of B become the 5-10 bits of the buffer
+  buffer |= (PINC << 10); // The lsb of C become the 11-16 bits of the buffer
+*/
 //  buffer = (PINC << 8) | PINB;
 }
 
 int main(){
   DDRD |= (1 << S88DATAOUT); // Is the only output...
+  DDRB |= (1 << LED); // LED is output as well...
 //  DDRB = (1 << 5);
 //  DDRC = 0;
 //  DDRD = 0b00100010; // Arduino Pro Mini TX and pin 6 as output 

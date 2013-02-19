@@ -17,6 +17,7 @@ uint8_t t;
 uint8_t m = 0;
 
 ISR(INT0_vect) {
+//    PORTD ^= 0xFF;
 //  cli();
   if (((PIND & (1 << S88CLK)) == (1 << S88CLK))) {   // If rising edge, write S88DATAOUT
     if ((buffer & 1) == 1) {
@@ -30,7 +31,6 @@ ISR(INT0_vect) {
     t = (PINB & S88DATAIN) ? 1 : 0;
     buffer |= (t << 15);
   };
-  
  
 //  sei();
 }

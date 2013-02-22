@@ -1,5 +1,5 @@
 PRG	    = S88NAtmegax8
-OBJ	    = S88NAtmegax8.c
+OBJ	    = S88NAtmegax8.S
 F_CPU	    = 8000000
 MCU_TARGET     = atmega48
 #MCU_TARGET     = atmega328p
@@ -61,6 +61,7 @@ LIBS	   =
 # You should not have to change anything below here.
 
 CC	     = avr-gcc
+AS	     = avr-as
 
 # Override is only needed by avr-lib build system.
 

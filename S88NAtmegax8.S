@@ -47,9 +47,28 @@ int0_done:
 	
 	.global INT1_vect
 INT1_vect:  ; Load
+	in  r19, _SFR_IO_ADDR(SREG) ; Up to now we didn't touch SREG and toggling the pin is more important!'
 	sbi _SFR_IO_ADDR(PIND), LED ; toggle the led
-	ldi	r24, 0xF0
-	ldi	r25, 0xCE
+#	ldi	r24, 0xF0
+#	ldi	r25, 0xCE
+	#  The four msb of D become the lsb of the buffer
+	in      r23, _SFR_IO_ADDR(PIND)
+	swap    r23 # Swap nibbles
+	andi    r23, 0x0F
+	or      r25, r23
+        # All bits of B become the 5-10 bits of the buffer
+	in      r23, _SFR_IO_ADDR(PINB)
+	swap    r23
+	or	r24, r23
+	andi	r24, 0x03
+	andi    r23, 0xF0
+	or	r25, r23
+	# The lsb of C become the 11-16 bits of the buffer
+	in	r23, _SFR_IO_ADDR(PINC)
+	lsl	r23
+	lsl	r23
+	or	r25, r23
+	out     _SFR_IO_ADDR(SREG), r19
 	reti
 
 ioinit:
@@ -57,6 +76,12 @@ ioinit:
 	sbi _SFR_IO_ADDR(DDRD), S88DATAOUT
 	sbi _SFR_IO_ADDR(DDRD), LED
 	
+	# Set pullup on intputs
+	ldi	r19, 0xFF;
+	out	_SFR_IO_ADDR(PORTC), r19;
+	out	_SFR_IO_ADDR(PORTB), r19;
+	ldi	r19, 0xF0;
+	out	_SFR_IO_ADDR(PORTD), r19;
 	# Set interrupts on load en clock lines:
 	lds	r24, EICRA
     ori	r24, 0x01

@@ -25,6 +25,7 @@ The parts for the first revision (Rev. 0) have been ordered, including the PCB a
 </table>
 *When ordering 10+ quantities
 
+The boards came back from Seeedstudios and they work, only one small issue where a track was not connected, update soon!
 LICENSE
 -------
 

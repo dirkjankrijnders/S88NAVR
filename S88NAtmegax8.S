@@ -5,7 +5,7 @@ S88LOAD = PD3
 S88CLK=  PD2
 S88DATAIN = PB7
 S88DATAOUT = PD0
-LED= PB6 
+LED = PB6 
 
 # buffer is stored in r25:r24
 bufh = r24
@@ -28,10 +28,10 @@ INT0_vect:  ; Clock
 	rjmp clock_low
 	sbrs r24, 0  ; lsb set
 	rjmp data_low
-	sbi _SFR_IO_ADDR(PORTD), S88DATAOUT
+	cbi _SFR_IO_ADDR(PORTD), S88DATAOUT
 	rjmp rotate_buf
 data_low:
-	cbi _SFR_IO_ADDR(PORTD), S88DATAOUT
+	sbi _SFR_IO_ADDR(PORTD), S88DATAOUT
 	
 rotate_buf:
 	in  r19, _SFR_IO_ADDR(SREG) ; Up to now we didn't touch SREG and toggling the pin is more important!'
@@ -39,7 +39,7 @@ rotate_buf:
 	ror r24
 	rjmp int0_done
 clock_low:
-	sbic _SFR_IO_ADDR(PIND), S88DATAIN
+	sbis _SFR_IO_ADDR(PIND), S88DATAIN
 	sbr r24, 0x80
 int0_done:	
 	out     _SFR_IO_ADDR(SREG), r19

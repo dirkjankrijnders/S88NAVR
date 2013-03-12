@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 23 Jan 2013 11:11:31 PM CET
+EESchema Schematic File Version 2  date Tuesday, 2013 February 19 15:44:35
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -35,7 +35,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "23 jan 2013"
+Date "19 feb 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -49,6 +49,8 @@ U 1 1 50FFDA68
 P 2850 3450
 F 0 "J1" H 3050 3950 60  0000 C CNN
 F 1 "RJ45" H 2700 3950 60  0000 C CNN
+F 2 "" H 2850 3450 60  0001 C CNN
+F 3 "" H 2850 3450 60  0001 C CNN
 	1    2850 3450
 	0    -1   -1   0   
 $EndComp
@@ -58,6 +60,8 @@ U 1 1 50FFDA8F
 P 4300 3400
 F 0 "P1" V 4250 3400 60  0000 C CNN
 F 1 "CONN_6" V 4350 3400 60  0000 C CNN
+F 2 "" H 4300 3400 60  0001 C CNN
+F 3 "" H 4300 3400 60  0001 C CNN
 	1    4300 3400
 	1    0    0    -1  
 $EndComp
@@ -67,6 +71,8 @@ U 1 1 50FFDA9E
 P 4300 4300
 F 0 "P2" V 4250 4300 60  0000 C CNN
 F 1 "CONN_6" V 4350 4300 60  0000 C CNN
+F 2 "" H 4300 4300 60  0001 C CNN
+F 3 "" H 4300 4300 60  0001 C CNN
 	1    4300 4300
 	1    0    0    -1  
 $EndComp
@@ -113,9 +119,6 @@ Wire Wire Line
 	3300 3600 3750 3600
 Connection ~ 3750 3600
 Wire Wire Line
-	3300 3400 3800 3400
-Connection ~ 3800 3400
-Wire Wire Line
 	3300 3500 3700 3500
 Connection ~ 3700 3500
 Wire Wire Line
@@ -133,4 +136,7 @@ Wire Wire Line
 	3500 4600 3500 3100
 Wire Wire Line
 	3500 3100 3300 3100
+Wire Wire Line
+	3300 3400 3750 3400
+Connection ~ 3750 3400
 $EndSCHEMATC

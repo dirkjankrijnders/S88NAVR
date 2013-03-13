@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 2 date Tue 12 Mar 2013 04:59:52 PM CET
+PCBNEW-BOARD Version 2 date Wed 13 Mar 2013 07:43:39 AM CET
 
 # Created by Pcbnew(2013-01-27 BZR 3925)-testing
 
@@ -21,7 +21,7 @@ $EndGENERAL
 $SHEETDESCR
 Sheet A3 16535 11693
 Title ""
-Date "12 mar 2013"
+Date "13 mar 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -8369,7 +8369,7 @@ $EndTEXTPCB
 $TEXTPCB
 Te "Design: Dirkjan Krijnders"
 nl "github.com/dirkjankrijnders/S88NAVR"
-nl "Rev. 0"
+nl "Rev. 0.1"
 Po 120.2 173.4 0.8 0.8 0.15 0
 De 21 1 0 Normal L C
 $EndTEXTPCB

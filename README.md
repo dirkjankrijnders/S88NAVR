@@ -1,7 +1,7 @@
 S88NAVR
 =======
 
-An implementation of the S88-N protocol for Atmel Atmega[8/48/88/168/328] microcontrollers. So far, only an Arduino Pro Mini version has been tested.
+An implementation of the S88-N protocol for Atmel Atmega[8/48/88/168/328] microcontrollers. So far, an Arduino Pro Mini version and the actual board have been tested.
 
 Goal
 ----
@@ -25,6 +25,7 @@ The parts for the first revision (Rev. 0) have been ordered, including the PCB a
 </table>
 *When ordering 10+ quantities
 
+The boards came back from Seeedstudios and they work, only one small issue where a track was not connected, update in as rev 0.1. Only in the kicad files, the change is too small to spin a new board.
 LICENSE
 -------
 

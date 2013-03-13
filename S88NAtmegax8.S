@@ -53,7 +53,7 @@ INT1_vect:  ; Load
 #	ldi	r25, 0xCE
 	#  The four msb of D become the lsb of the buffer
 	in      r23, _SFR_IO_ADDR(PIND)
-	swap    r23 # Swap nibbles
+	swap    r23 ; Swap nibbles
 	andi    r23, 0x0F
 	or      r25, r23
         # All bits of B become the 5-10 bits of the buffer

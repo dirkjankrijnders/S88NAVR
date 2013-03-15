@@ -1,5 +1,5 @@
-PRG	    = S88NAtmegax8
-OBJ	    = S88NAtmegax8.S
+PRG	    = S88NADC
+OBJ	    = S88NADC.c
 F_CPU	    = 8000000
 MCU_TARGET     = atmega48
 #MCU_TARGET     = atmega328p

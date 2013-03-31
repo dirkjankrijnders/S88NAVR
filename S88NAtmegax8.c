@@ -12,21 +12,22 @@
 #include <avr/interrupt.h>
 
 
-volatile uint16_t buffer = 43690;
-// uint16_t t;
+volatile uint16_t buffer[2] = {43690, 0x00FF};
+volatile uint8_t oBuf = 0;
+volatile uint8_t rBuf = 1;
 
 ISR(INT0_vect) {
 	if (((PIND & (1 << S88CLK)) == (1 << S88CLK))) {   // If rising edge, write S88DATAOUT
-		if ((buffer & 1) == 1)
+		if ((buffer[oBuf] & 1) == 1)
 			PORTD &= ~(1 << S88DATAOUT);
 		else 
 			PORTD |= (1 << S88DATAOUT); //(1 << 6);
 
 		// Shift register and add value;
-		buffer = (buffer >> 1);// | t;
+		buffer[oBuf] = (buffer[oBuf] >> 1);// | t;
 	} else {   // If falling edge, read S88DATAIN
 		uint16_t t = (PINB & (1 << S88DATAIN)) ? 0 : 1;
-		buffer |= (t << 15);
+		buffer[oBuf] |= (t << 15);
 		PORTB ^= (1 << LED);
 	};
 
@@ -35,12 +36,19 @@ ISR(INT0_vect) {
 ISR(INT1_vect) { // LOAD
 	PORTD &= ~(1 << S88DATAOUT);
 
-	buffer = 0;
-	buffer |= (PIND >> 4); // The four msb of D become the lsb of the buffer
-	buffer |= (PINB << 4); // All bits of B become the 5-10 bits of the buffer
-	buffer &= ~((1 << 11)|(1 << 12));
-	buffer |= (PINC << 10); // The lsb of C become the 11-16 bits of the buffer
-	buffer |= (PINC << 10);
+	if (oBuf == 0) {
+		oBuf = 1;
+		rBuf = 0;
+	} else {
+		oBuf = 0;
+		rBuf = 1;
+	};
+	buffer[rBuf] = 0;
+	buffer[rBuf] |= (PIND >> 4); // The four msb of D become the lsb of the buffer[oBuf]
+	buffer[rBuf] |= (PINB << 4); // All bits of B become the 5-10 bits of the buffer[oBuf]
+	buffer[rBuf] &= ~((1 << 11)|(1 << 12));
+	buffer[rBuf] |= (PINC << 10); // The lsb of C become the 11-16 bits of the buffer[oBuf]
+	buffer[rBuf] |= (PINC << 10);
 }
 
 int main(){

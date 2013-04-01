@@ -10,24 +10,34 @@
 #include <inttypes.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
+volatile uint16_t buffer = 43690;
 
-volatile uint16_t buffer[2] = {43690, 0x00FF};
-volatile uint8_t oBuf = 0;
-volatile uint8_t rBuf = 1;
+enum deb_state{
+	DEB_OCC,
+	DEB_OF,
+	DEB_FREE,
+	DEB_FO
+} ;
+
+struct deb {
+	enum deb_state state;
+	uint8_t count;
+} deb[16];
 
 ISR(INT0_vect) {
 	if (((PIND & (1 << S88CLK)) == (1 << S88CLK))) {   // If rising edge, write S88DATAOUT
-		if ((buffer[oBuf] & 1) == 1)
+		if ((buffer & 1) == 1)
 			PORTD &= ~(1 << S88DATAOUT);
 		else 
 			PORTD |= (1 << S88DATAOUT); //(1 << 6);
 
 		// Shift register and add value;
-		buffer[oBuf] = (buffer[oBuf] >> 1);// | t;
+		buffer = (buffer >> 1);// | t;
 	} else {   // If falling edge, read S88DATAIN
 		uint16_t t = (PINB & (1 << S88DATAIN)) ? 0 : 1;
-		buffer[oBuf] |= (t << 15);
+		buffer |= (t << 15);
 		PORTB ^= (1 << LED);
 	};
 
@@ -35,20 +45,19 @@ ISR(INT0_vect) {
 
 ISR(INT1_vect) { // LOAD
 	PORTD &= ~(1 << S88DATAOUT);
-
-	if (oBuf == 0) {
-		oBuf = 1;
-		rBuf = 0;
-	} else {
-		oBuf = 0;
-		rBuf = 1;
-	};
-	buffer[rBuf] = 0;
-	buffer[rBuf] |= (PIND >> 4); // The four msb of D become the lsb of the buffer[oBuf]
-	buffer[rBuf] |= (PINB << 4); // All bits of B become the 5-10 bits of the buffer[oBuf]
-	buffer[rBuf] &= ~((1 << 11)|(1 << 12));
-	buffer[rBuf] |= (PINC << 10); // The lsb of C become the 11-16 bits of the buffer[oBuf]
-	buffer[rBuf] |= (PINC << 10);
+	buffer = 0;//~(43690);
+	buffer = deb[8].count;
+//	deb[8].count = 0;
+	uint8_t ii;
+	for (ii = 0; ii < 16; ii++) {
+//		buffer |= ((deb[ii].state == DEB_FREE) | (deb[ii].state == DEB_FO)) ? (1 << ii) : 0;
+/*		if (deb[ii].count == 0xff) {
+			buffer |= (1 << (ii));
+		} else {
+			buffer &= ~((1 << (ii)) & buffer);
+		};
+*/
+	}
 }
 
 int main(){
@@ -66,7 +75,39 @@ int main(){
 	EICRA |= (1 << ISC11);    
 	EIMSK |= (1 << INT1);     // Turns on INT1
 	sei();
+	uint16_t temp;
+	uint16_t mask;
+	uint8_t ii;
 	while(1) {
+		temp = 0;
+		_delay_ms(0.2);
+		temp |= (PIND >> 4); // The four msb of D become the lsb of the buffer
+		temp |= (PINB << 4); // All bits of B become the 5-10 bits of the buffer
+		temp &= ~((1 << 11)|(1 << 12));
+		temp |= (PINC << 10); // The lsb of C become the 11-16 bits of the buffer
+		temp |= (PINC << 10);
+		mask = 1;
+		for (ii = 0; ii < 16; ii++) {
+			deb[ii].count = (deb[ii].count < 1);
+			if (((temp & mask) == mask)) {
+				deb[ii].count |= 1;
+			} else {
+				deb[ii].count |= 0;
+				
+/*				if (deb[ii].count > 0) deb[ii].count--;
+				if ((deb[ii].state == DEB_OF) & (deb[ii].count < 55))  {
+					deb[ii].count = 0;
+					deb[ii].state = DEB_FO;
+				}
+			} else {
+				if (deb[ii].count < 255) deb[ii].count++;
+				if ((deb[ii].state == DEB_FO) & (deb[ii].count > 200))  {
+					deb[ii].count = 255;
+					deb[ii].state = DEB_OF;
+				}*/
+			}	
+			mask = (mask < 1);
+		}
 	};
 	return 0;
 };

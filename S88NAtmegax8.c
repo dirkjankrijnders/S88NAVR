@@ -106,7 +106,7 @@ int main(){
 					deb[ii].state = DEB_OF;
 				}*/
 			}	
-			mask = (mask < 1);
+			mask = (mask << 1);
 		}
 	};
 	return 0;

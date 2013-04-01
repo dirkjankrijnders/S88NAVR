@@ -6,3 +6,11 @@
 *.srec
 
 *.lst
+
+Hardware/Outputs/*
+_autosave*
+*.kicad_pcb-bak
+
+Images/S88P3-B_SilkS.pdf
+
+tags

@@ -88,7 +88,7 @@ int main(){
 		temp |= (PINC << 10);
 		mask = 1;
 		for (ii = 0; ii < 16; ii++) {
-			deb[ii].count = (deb[ii].count < 1);
+			deb[ii].count = (deb[ii].count << 1);
 			if (((temp & mask) == mask)) {
 				deb[ii].count |= 1;
 			} else {

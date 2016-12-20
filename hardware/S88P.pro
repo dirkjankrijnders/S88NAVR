@@ -1,8 +1,8 @@
-update=2016 December 20, Tuesday 10:14:13
+update=2016 December 20, Tuesday 10:44:30
 last_client=kicad
 [eeschema]
 version=1
-LibDir=
+LibDir=../../Kicad_Library
 [eeschema/libraries]
 LibName1=S88P-rescue
 LibName2=power
@@ -34,3 +34,4 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
+LibName31=/Users/dirkjan/Projects/Own/Kicad_Library/pyth
